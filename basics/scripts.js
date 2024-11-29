@@ -46,3 +46,19 @@ class ClasosPlayer {
 const gomSzab = new ClasosPlayer("GomSzab");
 console.log(gomSzab);
 
+
+
+function Person(name){
+    this.name = name;
+}
+
+Person.prototype.getName = function (){
+    return this.name
+}
+
+function Student(name, school){
+    Person.call(this, name);
+    this.school = school;
+}
+
+Object.setPrototypeOf(Student.prototype, Person.prototype);
