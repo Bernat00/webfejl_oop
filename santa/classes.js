@@ -1,12 +1,25 @@
-
+import { createRow } from "./functions";
 
 export class Factory{
  constructor(){
-    this.Companions = [];
+    this.companions = [];
  }
 
  addCompanion(mano){
-    this.Companions+=mano;
+    this.companions.push(mano);
+    createRow(mano);
+ }
+
+
+//      todo megkerdezni h a 8as feladat megis mi a jo edes lónemiszervet akar jelenteni,
+//          ez itt nem akar mukodni mint c#ban de nem szol erte az intelisense
+// addCompanion(form, asd){         
+//    this.companions.push(form);
+// }
+
+
+ getNewIndex(){
+    return this.companions.length-1;
  }
 
 }

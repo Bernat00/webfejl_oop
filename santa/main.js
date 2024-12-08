@@ -1,3 +1,5 @@
+import { Factory } from "./classes";
+
 /**
  * @type {{
  *   firstName: string;

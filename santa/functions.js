@@ -5,7 +5,7 @@ import { Companion } from "./classes";
  * 
  * @param {Companion} companion 
  */
-function createRow(companion){
+export function createRow(companion){
     const table = document.getElementById('companions');
     const tbody = table.querySelector('tbody');
     const tableRow = document.createElement('tr');
