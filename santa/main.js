@@ -1,4 +1,4 @@
-import { Factory } from "./classes";
+//import { Factory } from "./classes.js";
 
 /**
  * @type {{

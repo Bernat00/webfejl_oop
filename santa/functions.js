@@ -1,11 +1,11 @@
-import { Companion } from "./classes";
+//import { Companion } from "./classes.js";
 
 /**
  * Create a row for the companions table;
  * 
  * @param {Companion} companion 
  */
-export function createRow(companion){
+function createRow(companion){
     const table = document.getElementById('companions');
     const tbody = table.querySelector('tbody');
     const tableRow = document.createElement('tr');
@@ -23,6 +23,7 @@ export function createRow(companion){
     const action = createCell(tableRow);
     const button = document.createElement('button');
     button.innerHTML = 'Megtekint';
+
     action.appendChild(button)
     button.addEventListener('click', checkEventListener)
 }
@@ -64,13 +65,19 @@ function appendToSelector(){
 function refreshProductList(companion){ //TODO
 
     const companionName = document.getElementById('companion_name');
-    // TODO 10
+    companionName.innerText = companion.getFullName();
     companionName.style.display = 'block';
     const productTable = document.getElementById('products');
     productTable.style.display = 'table';
     const productTableBody = productTable.querySelector('tbody')
-    productTableBody.innerHTML = '';
-    // TODO 10
+    productTableBody. innerHTML = '';
+    
+    for(const stuff of companion.producedStuff){
+        const row = document.createElement('tr');
+        productTableBody.appendChild(row);
+        const cell = createCell(row);
+        cell.innerText = stuff;
+    }
 }
 
 /**

@@ -1,30 +1,46 @@
-import { createRow } from "./functions";
+//import { createRow } from "./functions.js";
 
-export class Factory{
+class Factory{
  constructor(){
     this.companions = [];
  }
 
+
+ /**
+  * 
+  * @param {Companion} mano 
+  */
  addCompanion(mano){
     this.companions.push(mano);
     createRow(mano);
  }
 
-
-//      todo megkerdezni h a 8as feladat megis mi a jo edes lónemiszervet akar jelenteni,
-//          ez itt nem akar mukodni mint c#ban de nem szol erte az intelisense
-// addCompanion(form, asd){         
-//    this.companions.push(form);
-// }
+ // en nem ertem h mi van ezzel a designel mi az h itt adjak a gomboknak eventlistenert amikor itt van a companion a tablazat sorkeszitesnel
 
 
- getNewIndex(){
-    return this.companions.length-1;
+ /**
+  * 
+  * @param {Companion} mano 
+  */
+addCompanionAutoIndexer(mano){
+    mano.id = this.getNextId();
+    this.addCompanion(mano);
+}
+
+
+ getNextId(){
+    return this.companions.length;
  }
+
+ viewCompanion(id){
+    refreshProductList(this.companions[id]);
+}
+
+
 
 }
 
-export class Companion{
+class Companion{
     constructor(id, firstName, lastName, area){
         this.id = id;
         this.firstName = firstName;
@@ -34,10 +50,12 @@ export class Companion{
     }
 
     getFullName(){
-        return this.keresztnev + ' ' + this.vezeteknev;
+        return this.firstName + ' ' + this.lastName;
     }
 
     addProducedStuff(stuff){
-        this.producedStuff+=stuff;
+        for(const asd of stuff){
+            this.producedStuff.push(asd);
+        }
     }
 }
