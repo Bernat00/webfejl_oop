@@ -23,7 +23,9 @@ class ArrayList {
             },
             set: function (v) {
                 this.#items[i] = v;
-            }
+            },
+            configurable: true,
+            enumerable: true
         } )
 
         this.#count++;
@@ -32,6 +34,19 @@ class ArrayList {
     Clear(){
         this.#count = 0;
         this.#items = {};
+        for (const property in this) {
+          delete this[property];
+        }
+    }
+
+    Contains(item){
+        for (const i in this.#items) {
+            if(this.#items[i] === item){
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
@@ -47,8 +62,4 @@ arr.AddItem('basd');
 arr.AddItem('casd');
 console.log(arr);
 
-arr[2] = 'alma';
-
-arr.Count
-console.log(arr);
 
