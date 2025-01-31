@@ -20,6 +20,8 @@ class ArrayList {
         this.#arrayTable = arrayTable;
     }
 
+
+
     AddItem(item){
         this.#items[this.#count] = item;
         const i = this.#count;
@@ -35,11 +37,14 @@ class ArrayList {
         } )
 
         this.#count++;
+        if(this.#arrayTable)
+            this.#arrayTable.addPersonRow(item);
     }
 
     Clear(){
         this.#count = 0;
         this.#items = {};
+        this.#arrayTable = undefined;
         for (const property in this) {
           delete this[property];
         }
@@ -114,3 +119,10 @@ arrayTable.addPersonRow({nev: 'Kúr Tamás', eletkor:19})
 arrayTable.addPersonRow({nev: 'Leo Kádia', eletkor:40})
 arrayTable.addPersonRow({nev: 'Hiszt Erika', eletkor:35})
 
+const  button = document.createElement('button');
+button.innerText = 'nagyon button'
+button.addEventListener('click', ()=>{
+    arrayTable.addPersonRow({nev: 'Leo Kádia', eletkor:40})
+})
+
+document.body.appendChild(button);
