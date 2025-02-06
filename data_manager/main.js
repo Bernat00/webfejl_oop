@@ -71,7 +71,6 @@ class DataManager {
      */
     filterAge(age) {
         if(!age){
-            this.#updateCallback(this.#array);
             return;
         }
 
@@ -102,7 +101,7 @@ class DataTable{;
         document.body.appendChild(table);
 
         dataManager.setUpdateCallback((persons) => {
-            this.renderTable(persons, this.#tbody);         //todo itt ez a jó megoldás???
+            this.#renderTable(persons, this.#tbody);         //todo itt ez a jó megoldás???
         });
     }
 
@@ -110,7 +109,7 @@ class DataTable{;
      * 
      * @param {Person[]} persons 
      */
-    renderTable(persons, tbody){
+    #renderTable(persons, tbody){
         tbody.innerHTML = "";
         const tr = document.createElement('tr');
         const name = document.createElement('td');
