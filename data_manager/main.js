@@ -71,6 +71,7 @@ class DataManager {
      */
     filterAge(age) {
         if(!age){
+            this.#updateCallback(this.#array);
             return;
         }
 
