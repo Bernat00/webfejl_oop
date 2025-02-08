@@ -85,6 +85,23 @@ class DataManager {
 
         this.#updateCallback(result);
     }
+
+    filter(filterCallback){
+        if(filterCallback(false)){
+            this.#updateCallback(this.#array);
+            return;
+        }
+
+        const result = []
+
+        this.#array.forEach((person) => {
+            if (filterCallback(person)){
+                result.push(person);
+            }
+        })
+
+        this.#updateCallback(result);
+    }
 }
 
 
@@ -133,14 +150,41 @@ class DataTable{;
 
 
 
-dataManager = new DataManager([{nev: 'Kis Jancsi', eletkor: 22}, {nev: 'Kis Balázs', eletkor: 18}, {nev: 'Nagy Jancsi', eletkor: 11}]);
-dataTable = new DataTable(dataManager);
+const    dataManager = new DataManager([{nev: 'Kis Jancsi', eletkor: 22}, {nev: 'Kis Balázs', eletkor: 18}, {nev: 'Nagy Jancsi', eletkor: 11}]);
+const dataTable = new DataTable(dataManager);
 
 document.getElementById('name').addEventListener('input', (e) => {
-    dataManager.filterName(e.currentTarget.value);
+    dataManager.filter((person)=> {
+        if((person === false && e.currentTarget.value === '') || (person && person.nev.toLowerCase().includes(e.target.value)))
+            return true;
+    });
 })
 
 document.getElementById('age').addEventListener('input', (e) => {
-    dataManager.filterAge(e.currentTarget.value);
+    dataManager.filter((person) => {
+        if((person === false && !e.currentTarget.value) || person.eletkor == e.target.value)
+            return true;
+    });
 })
+
+
+const input = document.createElement('input');
+input.type = 'file';
+document.body.appendChild(input);
+
+input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsText(file);
+    fileReader.onload = () => {
+        const tmp = fileReader.result;
+        const lines = tmp.split('\n')
+
+        for(const data of lines){
+            const splitData =data.split(';');
+
+            dataManager.add({nev: splitData[0], eletkor: Number(splitData[1])});
+        }
+    };
+});
 
